@@ -27,6 +27,12 @@ export default function Header() {
 
         {/* Action Buttons */}
         <div className={styles.headerfc__actions}>
+          <button 
+              className={`${styles.headerfc__btn} ${styles.headerfc__btn_dashboard}`}
+              onClick={() => router.push('/dashboard-react')}
+            >
+              ACESSAR DASHBOARD
+          </button>
           <button className={styles.headerfc__btn} onClick={ () => { router.push('/login')}}>ENTRAR</button>
           <button className={`${styles.headerfc__btn} ${styles.headerfc__btn_secondary}`} onClick={ () => router.push("/register")}>INSCREVA-SE</button>
         </div>
