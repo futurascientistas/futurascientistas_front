@@ -1,12 +1,11 @@
+import API_ENDPOINTS from "@/lib/externalApi/endpoints";
 import { objectToFormData } from "@/utils/objectToFormData";
 import axios from "axios";
-
-const API_URL = "http://localhost:8000/usuarios/auth/";
 
 export async function login(cpf: string, senha: string) {
   try {
     const response = await axios.post(
-      `${API_URL}login/`,
+      API_ENDPOINTS.AUTH_LOGIN,
       {
         cpf: cpf,
         senha: senha,
@@ -34,7 +33,7 @@ export async function recoverPassword(
   cpf: string
 ): Promise<{ success: boolean; message: string }> {
   try {
-    const response = await axios.post(`${API_URL}recuperacao_senha/`, {
+    const response = await axios.post(API_ENDPOINTS.AUTH_RECOVER_PASSWORD, {
       cpf: cpf,
     });
 
@@ -62,7 +61,7 @@ export async function resetPassword(
 ): Promise<{ success: boolean; message?: string }> {
   try {
     const response = await axios.post(
-      `${API_URL}atualizar_senha/`,
+      API_ENDPOINTS.AUTH_UPDATE_PASSWORD,
       { new_password: new_password },
       {
         withCredentials: true,
@@ -91,7 +90,7 @@ export async function register(userData: any): Promise<{ success: boolean; messa
     }
     const formData = objectToFormData(userData);
 
-    const response = await axios.post(`${API_URL}cadastro/`, formData, { headers });
+    const response = await axios.post(API_ENDPOINTS.AUTH_CADASTRO, formData, { headers });
     return { success: true, message: response.data.message };
   } catch (error: any) {
     return {

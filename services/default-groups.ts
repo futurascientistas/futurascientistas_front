@@ -1,6 +1,7 @@
+import API_ENDPOINTS from "@/lib/externalApi/endpoints";
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/usuarios/grupos/default/";
+const API_URL = API_ENDPOINTS.USUARIOS_GRUPOS_DEFAULT;
 
 export type Group = {
   id: string;

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { UserApiResponse } from "../types/project"
+import API_ENDPOINTS from '@/lib/externalApi/endpoints';
 
-const API_URL = 'http://localhost:8000/auth/usuario/';
+const API_URL = API_ENDPOINTS.AUTH_USUARIO;
 
 export class UserService {
   static async listarTutores(): Promise<UserApiResponse> {

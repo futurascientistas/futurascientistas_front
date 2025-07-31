@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
+import API_ENDPOINTS from "@/lib/externalApi/endpoints";
 
 type UserType = {
   id: number;
@@ -20,8 +21,6 @@ type AuthContextType = {
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-const API_URL = "http://localhost:8000/usuarios/auth/";
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -29,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const fetchUser = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_URL}profile/`, {
+      const res = await axios.get(API_ENDPOINTS.AUTH_PROFILE, {
         withCredentials: true,
       });
 
@@ -52,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const refreshUser = () => fetchUser();
 
   const logout = async () => {
-    await axios.post(`${API_URL}logout/`, {}, { withCredentials: true });
+    await axios.post(API_ENDPOINTS.AUTH_LOGOUT, {}, { withCredentials: true });
     setUser(null);
   };
 
